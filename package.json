@@ -1,0 +1,26 @@
+{
+  "name": "wasm-with-rust",
+  "version": "0.0.0",
+  "description": "WASM vs JS",
+  "main": "index.js",
+  "scripts": {
+    "rust-compile": "rustc +nightly --target wasm32-unknown-unknown -O src/fib.rs --crate-type=cdylib",
+    "wasm-gc": "wasm-gc ./fib.wasm small-fib.wasm",
+    "debug": "npm run rust-compile && npm run wasm-gc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motss/wasm-with-rust.git"
+  },
+  "keywords": [
+    "wasm",
+    "js"
+  ],
+  "author": "Rong Sen Ng <wes.ngrongsen@gmail.com> (https://github.com/motss)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/motss/wasm-with-rust/issues"
+  },
+  "homepage": "https://github.com/motss/wasm-with-rust#readme"
+}

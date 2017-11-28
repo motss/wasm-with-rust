@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>wasm wasm wasm</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>WebAssembly vs JavaScript</h1>
+
+      <h2>WebAssembly</h2><div class="wasm"></div>
+
+      <h2>JavaScript</h2><div class="js"></div>
+    </main>
+
+    <script>
+      (async () => {
+        const wasmDiv = document.querySelector('.wasm');
+        const jsDiv = document.querySelector('.js');
+        const r = await fetch('small-fib.wasm');
+        const d = await r.arrayBuffer();
+
+        const results = await WebAssembly.instantiate(d, {});
+        const fib = results.instance.exports.fib;
+        const fibJs = n => n <= 2 ? 1 : fibJs(n - 1) + fibJs(n - 2);
+        const idx = 2e7;
+        const loops = Array(idx).fill(0);
+
+        const wasmStarts = window.performance.now();
+        const sum = loops.reduce((p, n) => p + fib(n), 0);
+        const wasmEnds = window.performance.now();
+
+        const jsStarts = window.performance.now();
+        const sumJs = loops.reduce((p, n) => p + fibJs(n), 0);
+        const jsEnds = window.performance.now();
+
+        wasmDiv.innerHTML = `Fibonacci(${idx}) takes ${(wasmEnds - wasmStarts).toFixed(3)}ms`;
+        jsDiv.innerHTML = `Fibonacci(${idx}) takes ${(jsEnds - jsStarts).toFixed(3)}ms`;
+      })();
+    </script>
+  </body>
+</html>

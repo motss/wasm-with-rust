@@ -24,19 +24,20 @@
         const results = await WebAssembly.instantiate(d, {});
         const fib = results.instance.exports.fib;
         const fibJs = n => n <= 2 ? 1 : fibJs(n - 1) + fibJs(n - 2);
-        const idx = 2e7;
+        const fibNum = 32;
+        const idx = 1e3 - 1;
         const loops = Array(idx).fill(0);
 
         const wasmStarts = window.performance.now();
-        const sum = loops.reduce((p, n) => p + fib(n), 0);
+        const sum = loops.reduce(p => p > Number.MAX_SAFE_INTEGER ? 0 : p + fib(fibNum), 0);
         const wasmEnds = window.performance.now();
 
         const jsStarts = window.performance.now();
-        const sumJs = loops.reduce((p, n) => p + fibJs(n), 0);
+        const sumJs = loops.reduce(p => p > Number.MAX_SAFE_INTEGER ? 0 : p + fibJs(fibNum), 0);
         const jsEnds = window.performance.now();
 
-        wasmDiv.innerHTML = `Fibonacci(${idx}) takes ${(wasmEnds - wasmStarts).toFixed(3)}ms`;
-        jsDiv.innerHTML = `Fibonacci(${idx}) takes ${(jsEnds - jsStarts).toFixed(3)}ms`;
+        wasmDiv.innerHTML = `Fibonacci(${fibNum}) takes ${(wasmEnds - wasmStarts).toFixed(3)}ms`;
+        jsDiv.innerHTML = `Fibonacci(${fibNum}) takes ${(jsEnds - jsStarts).toFixed(3)}ms`;
       })();
     </script>
   </body>

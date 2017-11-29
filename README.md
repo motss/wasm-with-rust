@@ -1,10 +1,23 @@
 # WASM vs JS
 
-> TLDR; Firefox Quantum wins in JavaScript execution whereas Chrome 61 wins at execution running with WebAssembly.
+> TLDR; Chrome 61 runs the fastest.
 
-## Benchmark Results on different modern browsers
+## Testing methodology
 
-| | Edge 16 | Chrome 61 | Firefox Quantum (FF57) |
-| --- | ---: | ---: | ---: |
-| wasm | 2395.825 | **452.140** | 2051.350 |
-| js | 843.735 | 282.760 | **94.935** |
+Run `fibonacci(32)` repeatedly for `1e3 - 1` times and measure the total execution time.
+
+## Testing machine
+
+| Component | Specs |
+| --- | --- |
+| CPU | Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz 4C8T |
+| RAM | 16.0GB DDR-4 2133MHz |
+
+## Benchmark results on different modern browsers
+
+| | Edge 16 | Chrome 61 | Chrome 64 | Firefox Quantum (FF57) | Firefox Nightly (FF59) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| wasm | - | **7841.225** | 8575.750 | 8963.590 | 8742.015 |
+| js | - | **19288.455** | 23067.515 | 20580.420 | 20696.595 |
+
+_** Unable to run on Edge 16 without page crashing._

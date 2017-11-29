@@ -15,7 +15,7 @@ Run `fibonacci(32)` repeatedly for `1e3 - 1` times and measure the total executi
 
 ## Benchmark results on different modern browsers
 
-| | Edge 16 | Chrome 61 | Chrome 64 | Firefox Quantum (FF57) | Firefox Nightly (FF59) |
+| Total Execution time (ms) | Edge 16 | Chrome 61 | Chrome 64 | Firefox Quantum (FF57) | Firefox Nightly (FF59) |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | wasm | - | **7841.225** | 8575.750 | 8963.590 | 8742.015 |
 | js | - | **19288.455** | 23067.515 | 20580.420 | 20696.595 |
